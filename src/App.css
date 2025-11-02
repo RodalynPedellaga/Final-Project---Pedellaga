@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.first_page {
+  display: flex;
+  height: 100vh;
+  /* removed bright background image per request; using dark hero */
+  background: linear-gradient(180deg, rgba(2,12,24,0.75), rgba(4,18,30,0.85));
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+  overflow: hidden;
+  position: relative; /* needed so ::before sits inside and z-index works */
+}
+
+.first_page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* use brand color gradient instead of external image */
+  background: linear-gradient(180deg, var(--brand, rgba(20,110,170,0.95)), rgba(4,18,30,0.6));
+  pointer-events: none; /* allow clicks through the visual overlay */
+  z-index: 0;
+}
+
+.first_page h1 {
+  position: relative;
+  z-index: 2;
+}
+
+.get-started-btn {
+  background-color: var(--accent);
+  color: rgba(6,6,6,0.95);
+  border: none;
+  padding: 18px 38px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2; /* ensure button is above overlay and clickable */
+}
+
+.get-started-btn:hover {
+  /* keep same accent but slightly dim on hover for depth */
+  filter: brightness(0.94);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.32);
+}
+
+.getstarted_btn {
+  text-align: center;
+  font-size: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.main_event {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  background-color: transparent;
+}
+
+.aboutus_main {
+  width: 820px;
+  color: var(--text);
+  position: relative;
+  z-index: 2;
+}
+
+.aboutus_container {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: justify;
+}
+
+.aboutus_container p {
+  font-size: 20px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.first_page_name_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 500px;
+}
+
+.first_page_name_btn h1 {
+  font-size: 44px;
+  text-align: center;
+  color: var(--text);
+}
+
+.first_page_name_btn p {
+  font-size: 22px;
+  color: var(--muted);
+}
+
+.event-list-container {
+  position: absolute;
+  overflow-x: hidden;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(3,13,22,0.95);
+  transition: top 0.5s ease;
+  overflow-y: auto;
+  z-index: 2;
+  backdrop-filter: blur(6px);
+}
+
+.event-list-container.visible {
+  top: 0;
+}
+
+.budget_heading {
+  font-size: 40px;
+  color: var(--accent);
+}
+
+.budget_sentence {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+/* Smooth hero entrance and button polish */
+.first_page {
+  animation: heroIn 900ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* Livelier hero entrance */
+@keyframes heroIn {
+  0% { opacity: 0; transform: translateY(18px) scale(.992) rotateZ(-0.2deg); filter: blur(2px); }
+  60% { opacity: 1; transform: translateY(-6px) scale(1.02) rotateZ(0.1deg); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotateZ(0); }
+}
+
+/* subtle moving overlay to add depth */
+.first_page::before {
+  animation: bgDrift 14s linear infinite;
+}
+
+@keyframes bgDrift {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* content entrance with small stagger */
+.aboutus_container { animation: contentIn 900ms cubic-bezier(.2,.8,.2,1) both; }
+.aboutus_container p { opacity: 0; transform: translateY(8px); }
+.aboutus_container p:nth-child(1) { animation: textIn 700ms both 140ms; }
+.aboutus_container p:nth-child(2) { animation: textIn 700ms both 260ms; }
+.aboutus_container p:nth-child(3) { animation: textIn 700ms both 380ms; }
+
+@keyframes contentIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button entrance + gentle float */
+.get-started-btn { animation: buttonEntrance 700ms cubic-bezier(.2,.8,.2,1) both; }
+@keyframes buttonEntrance {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  60% { transform: translateY(-6px) scale(1.03); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.get-started-btn:hover { animation: none; transform: translateY(-4px) scale(1.02); }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .first_page, .first_page::before, .aboutus_container, .get-started-btn { animation: none !important; transition: none !important; }
+}
+
+.get-started-btn {
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;
+}
+.get-started-btn:active { transform: translateY(1px) scale(.997); }
+.get-started-btn:focus { box-shadow: 0 8px 28px rgba(0,0,0,0.4); }

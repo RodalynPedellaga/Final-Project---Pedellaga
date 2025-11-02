@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+:root {
+  /* Use a friendly geometric font that fits UI well */
+  font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+:root {
+  /* Refreshed aesthetic palette (cool teal + warm coral accents) */
+  --brand: #3dd6c2; /* primary brand (used for glows/CTA) */
+  --brand-glow: rgba(61,214,194,0.12);
+  --bg: #041826; /* deep ocean blue background */
+  --surface: #07232d; /* card / panel (dark slate) */
+  --muted-surface: #0b3942; /* slightly lighter card */
+  --text: #f6fbfb; /* soft off-white for primary text */
+  --muted: #9ac6bf; /* desaturated teal for secondary text */
+  --accent: #ff7a66; /* warm coral accent for headings/buttons */
+  --accent-2: #3dd6c2; /* aqua accent for secondary actions */
+  --glass: rgba(255,255,255,0.03);
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+
+:root {
+  --ease-quick: 160ms cubic-bezier(.2,.9,.2,1);
+  --ease-default: 280ms cubic-bezier(.2,.8,.2,1);
+  --ease-slow: 420ms cubic-bezier(.2,.7,.2,1);
+}
+
+/* Page load fade-in */
+body {
+  background: linear-gradient(180deg, var(--bg) 0%, #04121b 100%);
+  color: var(--text);
+  opacity: 0;
+  animation: pageFadeIn 320ms var(--ease-default) forwards;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Links and buttons */
+a, button {
+  transition: color var(--ease-quick), background-color var(--ease-quick), transform var(--ease-quick), box-shadow var(--ease-default);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Utility entrance animations */
+.fade-in { animation: fadeIn 360ms var(--ease-default) both; }
+.slide-up { animation: slideUp 420ms var(--ease-slow) both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Smooth anchor scrolling for section navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: var(--surface);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background-color 160ms ease;
+  color: var(--text);
+  box-shadow: 0 6px 18px rgba(2,6,12,0.6);
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(2,6,12,0.7);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}

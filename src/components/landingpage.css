@@ -1,0 +1,99 @@
+/* Background image with slight blur behind the content */
+.aboutus_section {
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* default background uses a CSS variable --brand; user will supply exact color */
+  background: linear-gradient(180deg, var(--brand, #c99c3b), rgba(0,0,0,0.02));
+}
+
+.aboutus_container {
+  position: relative; /* sits above the background */
+  z-index: 1;
+  color: #ffffff;
+  max-width: 900px;
+  padding: 3rem;
+  background: rgba(0, 0, 0, 0.18); /* subtle overlay for readability */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.hero_title {
+  font-size: 36px;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.hero_sub {
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 18px;
+  font-size: 18px;
+}
+
+.about_text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 18px;
+}
+
+.about_text p {
+  color: rgba(255,255,255,0.95);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.landing_cta { margin-top: 12px; }
+.landing_get_started {
+  background: rgba(255,255,255,0.95);
+  color: var(--brand, #c99c3b);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  
+}
+.landing_get_started:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.25); }
+
+/* Neon hover effect that adapts to the brand color.
+   Usage: add class `fx-neon` to the button (applied in JSX).
+   The glow uses --brand and an optional --brand-glow variable for tint/opacity.
+*/
+.fx-neon {
+  position: relative;
+  z-index: 1;
+  will-change: transform, box-shadow;
+}
+.fx-neon:hover {
+  background: var(--brand, #c99c3b);
+  color: #fff;
+  transform: translateY(-3px) scale(1.02);
+  /* multi-layer glow using the brand color */
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.28),
+    0 0 8px var(--brand, #c99c3b),
+    0 0 24px var(--brand, #c99c3b);
+}
+
+/* Optional stronger neon when user holds focus/active */
+.fx-neon:active, .fx-neon:focus {
+  box-shadow:
+    0 5px 14px rgba(0,0,0,0.25),
+    0 0 12px var(--brand, #c99c3b),
+    0 0 38px rgba(255,255,255,0.06);
+  outline: none;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .aboutus_container { padding: 1.25rem; margin: 1rem; }
+  .hero_title { font-size: 28px; }
+}
