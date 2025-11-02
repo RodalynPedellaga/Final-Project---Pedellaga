@@ -2,36 +2,67 @@
 .aboutus_section {
   position: relative;
   overflow: hidden;
-  min-height: 60vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* default background uses a CSS variable --brand; user will supply exact color */
-  background: linear-gradient(180deg, var(--brand, #c99c3b), rgba(0,0,0,0.02));
+  /* make section transparent so the full-page body image can show through */
+  background: transparent;
+}
+
+/* Full-cover blurred background image layer. Replace the URL below to change the image. */
+.aboutus_section::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  /* Make this layer fully transparent so the image is fully visible */
+  background: transparent;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .aboutus_container {
   position: relative; /* sits above the background */
   z-index: 1;
   color: #ffffff;
-  max-width: 900px;
-  padding: 3rem;
-  background: rgba(0, 0, 0, 0.18); /* subtle overlay for readability */
+  max-width: 1000px;
+  padding: 2.5rem 2rem;
+  /* Make the panel transparent so the background image is fully visible */
+  background: transparent;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
   text-align: center;
 }
 
 .hero_title {
-  font-size: 36px;
-  margin-bottom: 6px;
+  /* big, responsive hero with modern feel */
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-weight: 800;
   color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.02;
+  letter-spacing: -0.6px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  /* fluid type: clamp(min, preferred, max) */
+  font-size: clamp(40px, 6.5vw, 88px);
+}
+
+.hero_block { margin-bottom: 14px; }
+
+.hero_accent {
+  /* accent word with subtle gradient */
+  background: linear-gradient(90deg, #8be3ff 0%, #3dd6c2 40%, #7ef2b5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero_sub {
-  color: rgba(255,255,255,0.9);
-  margin-bottom: 18px;
-  font-size: 18px;
+  color: rgba(255,255,255,0.92);
+  margin: 8px 0 18px;
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 600;
+  opacity: 0.95;
 }
 
 .about_text {
@@ -44,7 +75,9 @@
 .about_text p {
   color: rgba(255,255,255,0.95);
   font-size: 16px;
-  line-height: 1.45;
+  line-height: 1.55;
+  max-width: 68ch;
+  margin: 0 auto;
 }
 
 .landing_cta { margin-top: 12px; }

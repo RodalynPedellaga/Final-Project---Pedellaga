@@ -210,8 +210,8 @@ const Conference = () => {
                           <button
                             className={
                               venueItems[index].quantity === 0
-                                ? "btn-warning btn-disabled"
-                                : "btn-minus btn-warning"
+                                ? "btn btn-warning btn-disabled"
+                                : "btn btn-minus btn-warning"
                             }
                             onClick={() => handleRemoveFromCart(index)}
                           >
@@ -225,8 +225,8 @@ const Conference = () => {
                           <button
                             className={
                               remainingAuditoriumQuantity === 0
-                                ? "btn-success btn-disabled"
-                                : "btn-success btn-plus"
+                                ? "btn btn-success btn-disabled"
+                                : "btn btn-success btn-plus"
                             }
                             onClick={() => handleAddToCart(index)}
                           >
@@ -234,12 +234,12 @@ const Conference = () => {
                           </button>
                         </>
                       ) : (
-                        <div className="button_container">
+                          <div className="button_container">
                           <button
                             className={
                               venueItems[index].quantity === 0
-                                ? " btn-warning btn-disabled"
-                                : "btn-warning btn-plus"
+                                ? "btn btn-warning btn-disabled"
+                                : "btn btn-warning btn-plus"
                             }
                             onClick={() => handleRemoveFromCart(index)}
                           >
@@ -253,8 +253,8 @@ const Conference = () => {
                           <button
                             className={
                               venueItems[index].quantity === 10
-                                ? " btn-success btn-disabled"
-                                : "btn-success btn-plus"
+                                ? "btn btn-success btn-disabled"
+                                : "btn btn-success btn-plus"
                             }
                             onClick={() => handleAddToCart(index)}
                           >
@@ -285,14 +285,14 @@ const Conference = () => {
                     <div>${item.cost}</div>
                     <div className="addons_btn">
                       <button
-                        className="btn-warning"
+                        className="btn btn-warning"
                         onClick={() => handleDecrementAvQuantity(index)}
                       >
                         &ndash;
                       </button>
                       <span className="quantity-value">{item.quantity}</span>
                       <button
-                        className="btn-success"
+                        className="btn btn-success"
                         onClick={() => handleIncrementAvQuantity(index)}
                       >
                         &#43;
@@ -332,6 +332,9 @@ const Conference = () => {
                       key={index}
                       style={{ padding: 15 }}
                     >
+                      <div className="meal_image">
+                        <img src={item.image} alt={item.name} />
+                      </div>
                       <div className="inner">
                         <input
                           type="checkbox"

@@ -8,17 +8,21 @@
 }
 
 :root {
-  /* Refreshed aesthetic palette (cool teal + warm coral accents) */
-  --brand: #3dd6c2; /* primary brand (used for glows/CTA) */
-  --brand-glow: rgba(61,214,194,0.12);
-  --bg: #041826; /* deep ocean blue background */
-  --surface: #07232d; /* card / panel (dark slate) */
-  --muted-surface: #0b3942; /* slightly lighter card */
-  --text: #f6fbfb; /* soft off-white for primary text */
-  --muted: #9ac6bf; /* desaturated teal for secondary text */
-  --accent: #ff7a66; /* warm coral accent for headings/buttons */
-  --accent-2: #3dd6c2; /* aqua accent for secondary actions */
-  --glass: rgba(255,255,255,0.03);
+  /* Enhanced aesthetic palette with modern vibrancy */
+  --brand: #00f2ff; /* electric cyan for primary brand */
+  --brand-glow: rgba(0, 242, 255, 0.15);
+  --bg: #040B14; /* deep space background */
+  --surface: #0A1A2F; /* deep navy surface */
+  --muted-surface: #112240; /* rich navy for cards */
+  --text: #E6F1FF; /* ice blue text */
+  --muted: #8892B0; /* sophisticated gray-blue */
+  --accent: #64FFDA; /* mint accent for CTAs */
+  --accent-2: #FF63C3; /* neon pink secondary accent */
+  --glass: rgba(255,255,255,0.04);
+  --glass-gradient: linear-gradient(120deg, 
+    rgba(255,255,255,0.05), 
+    rgba(255,255,255,0.02)
+  );
 }
 
 a {
@@ -39,12 +43,60 @@ a:hover {
 
 /* Page load fade-in */
 body {
+  position: relative; /* allow ::before background layer */
   background: linear-gradient(180deg, var(--bg) 0%, #04121b 100%);
   color: var(--text);
   opacity: 0;
   animation: pageFadeIn 320ms var(--ease-default) forwards;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Full-page background image layer placed behind app content. */
+body::before {
+  content: "";
+  position: fixed; /* fixed so it covers viewport even when scrolling */
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background-image: url("https://cdn.pixabay.com/photo/2020/08/27/10/24/water-5521696_1280.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* reduce blur and remove dim so the image is more visible */
+  filter: blur(2px) brightness(1);
+  transform: scale(1.02);
+  z-index: 0;
+  pointer-events: none; /* so background doesn't intercept clicks */
+  will-change: transform, filter;
+}
+
+/* Add a soft radial spotlight + color wash to match the landing hero design
+   (creates a large, subtle circular highlight in the center-right area). This
+   sits above the image but behind the app content, so the same visual style
+   is visible site-wide. Tweak --spot-opacity and position as needed. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(closest-side at 62% 28%, rgba(255,255,255,var(--spot-opacity,0.14)), rgba(255,255,255,0) 28%),
+    radial-gradient(ellipse at 30% 70%, rgba(61,214,194,0.06), rgba(61,214,194,0) 40%);
+  mix-blend-mode: normal;
+  transform: translateZ(0);
+}
+
+/* Ensure app root sits above background layers */
+#root {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ensure the React root container sits above the background layer */
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes pageFadeIn {

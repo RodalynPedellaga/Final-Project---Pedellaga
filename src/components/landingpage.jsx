@@ -4,8 +4,16 @@ const LandingPage = ({ onGetStarted }) => {
   return (
     <section className="aboutus_section">
       <div className="aboutus_container">
-        <h2 className="hero_title">Welcome to BudgetEase</h2>
-        <p className="hero_sub">Your simple partner for smarter budgeting.</p>
+
+        {/* Hero title (large & aesthetic) */}
+        <header className="hero_block">
+          <h1 className="hero_title">
+            Conference Expense
+            <br />
+            <span className="hero_accent">Planner</span>
+          </h1>
+          <p className="hero_sub">Plan your next major event with us!</p>
+        </header>
 
         <div className="about_text">
           <p>
